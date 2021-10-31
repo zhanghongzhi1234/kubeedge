@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: direct-mapper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: directmapper
+  template:
+    metadata:
+      labels:
+        app: directmapper
+    spec:
+      hostNetwork: true
+      containers:
+      - name: direct-mapper-container
+        image: directmapper:v1.0
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/kubeedge/
+        - mountPath: /dev/ttyS0
+          name: direct-dev0
+        - mountPath: /dev/ttyS1
+          name: direct-dev1
+      nodeSelector:
+        direct: "true"
+      volumes:
+      - name: config-volume
+        configMap:
+          name: device-profile-config-test
+      - name: direct-dev0
+        hostPath:
+          path: /dev/ttyS0
+      - name: direct-dev1
+        hostPath:
+          path: /dev/ttyS1
+      restartPolicy: Always

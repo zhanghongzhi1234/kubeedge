@@ -1,0 +1,220 @@
+{
+    "deviceInstances": [
+        {
+            "id": "mqtt-device",
+            "name": "mqtt-device",
+            "protocol": "customized-protocol-mqtt-device",
+            "model": "mqtt-sample-model",
+            "twins": [
+                {
+                    "propertyName": "temperature-enable",
+                    "desired": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "integer"
+                        }
+                    },
+                    "reported": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "integer"
+                        }
+                    }
+                },
+                {
+                    "propertyName": "temperature",
+                    "desired": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "integer"
+                        }
+                    },
+                    "reported": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "integer"
+                        }
+                    }
+                }
+            ],
+            "propertyVisitors": [
+                {
+                    "name": "temperature",
+                    "propertyName": "temperature",
+                    "modelName": "mqtt-sample-model",
+                    "protocol": "customized-protocol",
+                    "collectCycle": 5000,
+                    "visitorConfig": {
+                        "protocolName": "mqtt",
+                        "configData": {
+                            "topicField": "temperature"
+                        }
+                    }
+                },
+                {
+                    "name": "temperature-enable",
+                    "propertyName": "temperature-enable",
+                    "modelName": "mqtt-sample-model",
+                    "protocol": "customized-protocol",
+                    "visitorConfig": {
+                        "protocolName": "mqtt",
+                        "configData": {
+                            "topicField": "temperature-enable"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": "modbustcp-device",
+            "name": "modbustcp-device",
+            "protocol": "modbus-modbustcp-device",
+            "model": "modbus-sample-model",
+            "twins": [
+                {
+                    "propertyName": "temperature-enable",
+                    "desired": {
+                        "value": "",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "int"
+                        }
+                    },
+                    "reported": {
+                        "value": "40",
+                        "metadata": {
+                            "timestamp": "1635321019803",
+                            "type": "int"
+                        }
+                    }
+                },
+                {
+                    "propertyName": "temperature",
+                    "desired": {
+                        "value": "",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "int"
+                        }
+                    },
+                    "reported": {
+                        "value": "30",
+                        "metadata": {
+                            "timestamp": "1635322391806",
+                            "type": "int"
+                        }
+                    }
+                }
+            ],
+            "propertyVisitors": [
+                {
+                    "name": "temperature",
+                    "propertyName": "temperature",
+                    "modelName": "modbus-sample-model",
+                    "protocol": "modbus",
+                    "visitorConfig": {
+                        "limit": 1,
+                        "offset": 0,
+                        "register": "HoldingRegister",
+                        "scale": 1
+                    }
+                },
+                {
+                    "name": "temperature-enable",
+                    "propertyName": "temperature-enable",
+                    "modelName": "modbus-sample-model",
+                    "protocol": "modbus",
+                    "visitorConfig": {
+                        "limit": 1,
+                        "offset": 3,
+                        "register": "HoldingRegister",
+                        "scale": 1
+                    }
+                }
+            ]
+        }
+    ],
+    "deviceModels": [
+        {
+            "name": "mqtt-sample-model",
+            "properties": [
+                {
+                    "name": "temperature",
+                    "dataType": "int",
+                    "description": "temperature in degree celsius",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 0,
+                    "minimum": 0,
+                    "maximum": 100,
+                    "unit": "degree celsius"
+                },
+                {
+                    "name": "temperature-enable",
+                    "dataType": "int",
+                    "description": "enable data collection of temperature sensor",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 1,
+                    "minimum": 0,
+                    "maximum": 0
+                }
+            ]
+        },
+        {
+            "name": "modbus-sample-model",
+            "properties": [
+                {
+                    "name": "temperature",
+                    "dataType": "int",
+                    "description": "temperature in degree celsius",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 1,
+                    "minimum": 0,
+                    "maximum": 0
+                },
+                {
+                    "name": "temperature-enable",
+                    "dataType": "int",
+                    "description": "temperature-enable",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 1,
+                    "minimum": 0,
+                    "maximum": 0
+                }
+            ]
+        }
+    ],
+    "protocols": [
+        {
+            "name": "modbus-modbustcp-device",
+            "protocol": "modbus",
+            "protocolConfig": {
+                "slaveID": 1
+            },
+            "protocolCommonConfig": {
+                "tcp": {
+                    "ip": "172.31.51.156",
+                    "port": 502
+                }
+            }
+        },
+        {
+            "name": "customized-protocol-mqtt-device",
+            "protocol": "customized-protocol",
+            "protocolConfig": {
+                "protocolName": "mqtt",
+                "configData": {
+                    "certification": "",
+                    "password": "",
+                    "server": "tcp://127.0.0.1:1883",
+                    "topic": "mqtt/input/device/%s/delta",
+                    "username": ""
+                }
+            },
+            "protocolCommonConfig": null
+        }
+    ]
+}

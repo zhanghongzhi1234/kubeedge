@@ -1,0 +1,98 @@
+{
+    "deviceInstances": [
+        {
+            "id": "mqtt-device",
+            "name": "mqtt-device",
+            "protocol": "customized-protocol-mqtt-device",
+            "model": "mqtt-sample-model",
+            "twins": [
+                {
+                    "propertyName": "temperature-enable",
+                    "desired": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "integer"
+                        }
+                    },
+                    "reported": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "integer"
+                        }
+                    }
+                }
+            ],
+            "propertyVisitors": [
+                {
+                    "name": "temperature",
+                    "propertyName": "temperature",
+                    "modelName": "mqtt-sample-model",
+                    "protocol": "customized-protocol",
+                    "collectCycle": 5000,
+                    "visitorConfig": {
+                        "protocolName": "mqtt",
+                        "configData": {
+                            "topic": "temperature"
+                        }
+                    }
+                },
+                {
+                    "name": "temperature-enable",
+                    "propertyName": "temperature-enable",
+                    "modelName": "mqtt-sample-model",
+                    "protocol": "customized-protocol",
+                    "visitorConfig": {
+                        "protocolName": "mqtt",
+                        "configData": {
+                            "topic": "temperature-enable"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "deviceModels": [
+        {
+            "name": "mqtt-sample-model",
+            "properties": [
+                {
+                    "name": "temperature",
+                    "dataType": "int",
+                    "description": "temperature in degree celsius",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 0,
+                    "minimum": 0,
+                    "maximum": 100,
+                    "unit": "degree celsius"
+                },
+                {
+                    "name": "temperature-enable",
+                    "dataType": "int",
+                    "description": "enable data collection of temperature sensor",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 1,
+                    "minimum": 0,
+                    "maximum": 0
+                }
+            ]
+        }
+    ],
+    "protocols": [
+        {
+            "name": "customized-protocol-mqtt-device",
+            "protocol": "customized-protocol",
+            "protocolConfig": {
+                "protocolName": "mqtt",
+                "configData": {
+                    "certification": "",
+                    "password": "",
+                    "server": "tcp://127.0.0.1:1883",
+                    "username": ""
+                }
+            },
+            "protocolCommonConfig": null
+        }
+    ]
+}
