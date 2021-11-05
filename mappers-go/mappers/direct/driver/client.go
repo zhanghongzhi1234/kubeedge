@@ -91,8 +91,10 @@ func (c *DirectClient) GetStatus() string {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	err := c.Client.Connect()
-	if err == nil {
+	//err := c.Client.Connect()
+	isConnected := c.Client.Client.IsConnected()
+
+	if isConnected == true {
 		return common.DEVSTOK
 	}
 	return common.DEVSTDISCONN

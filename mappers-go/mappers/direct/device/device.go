@@ -21,6 +21,7 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
+	"strings"
 	"sync"
 	"time"
 
@@ -278,8 +279,8 @@ func initGetStatus(dev *globals.DirectDev) {
 
 // start start the device.
 func start(dev *globals.DirectDev) {
-	if dev.Instance.ProtocolName != "customized-protocol-mqtt-device" {
-		klog.Errorf("protocol not supported: %v", dev.Instance.ProtocolName)
+	if strings.Contains(dev.Instance.ProtocolName, "customized-protocol-mqtt-device") == false {
+		klog.Errorf("%v start fail, protocol not supported: %v", dev.Instance.ID, dev.Instance.ProtocolName)
 		return
 	}
 	var protocolCommConfig configmap.DirectProtocolCommonConfig
@@ -315,6 +316,8 @@ func start(dev *globals.DirectDev) {
 		klog.Errorf("Init subscribe mqtt error: %v", err)
 		return
 	}
+
+	klog.V(1).Info(dev.Instance.ID, " start successfully")
 
 	initGetStatus(dev)
 }
