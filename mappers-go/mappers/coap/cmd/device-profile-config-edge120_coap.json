@@ -1,0 +1,424 @@
+{
+    "deviceInstances": [
+        {
+            "id": "mqtt-device",
+            "name": "mqtt-device",
+            "protocol": "customized-protocol-mqtt-device",
+            "model": "mqtt-sample-model",
+            "twins": [
+                {
+                    "propertyName": "temperature-enable",
+                    "desired": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "int"
+                        }
+                    },
+                    "reported": {
+                        "value": "11",
+                        "metadata": {
+                            "timestamp": "1637312376704",
+                            "type": "int"
+                        }
+                    }
+                },
+                {
+                    "propertyName": "temperature",
+                    "desired": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "int"
+                        }
+                    },
+                    "reported": {
+                        "value": "26",
+                        "metadata": {
+                            "timestamp": "1637312376721",
+                            "type": "int"
+                        }
+                    }
+                }
+            ],
+            "propertyVisitors": [
+                {
+                    "name": "temperature",
+                    "propertyName": "temperature",
+                    "modelName": "mqtt-sample-model",
+                    "protocol": "customized-protocol",
+                    "collectCycle": 5000,
+                    "visitorConfig": {
+                        "configData": {
+                            "topicField": "temperature"
+                        },
+                        "protocolName": "mqtt"
+                    }
+                },
+                {
+                    "name": "temperature-enable",
+                    "propertyName": "temperature-enable",
+                    "modelName": "mqtt-sample-model",
+                    "protocol": "customized-protocol",
+                    "visitorConfig": {
+                        "configData": {
+                            "topicField": "temperature-enable"
+                        },
+                        "protocolName": "mqtt"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "device-smj.manipulator",
+            "name": "device-smj.manipulator",
+            "protocol": "customized-protocol-device-smj.manipulator",
+            "model": "devicemodel-smj.manipulator",
+            "twins": [
+                {
+                    "propertyName": "move",
+                    "desired": {
+                        "value": "",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    },
+                    "reported": {
+                        "value": "",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "propertyName": "height",
+                    "desired": {
+                        "value": "",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    },
+                    "reported": {
+                        "value": "",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    }
+                }
+            ],
+            "propertyVisitors": [
+                {
+                    "name": "move",
+                    "propertyName": "move",
+                    "modelName": "devicemodel-smj.manipulator",
+                    "protocol": "customized-protocol",
+                    "visitorConfig": {
+                        "configData": {
+                            "topicField": "move"
+                        },
+                        "protocolName": "mqtt"
+                    }
+                },
+                {
+                    "name": "height",
+                    "propertyName": "height",
+                    "modelName": "devicemodel-smj.manipulator",
+                    "protocol": "customized-protocol",
+                    "visitorConfig": {
+                        "configData": {
+                            "topicField": "height"
+                        },
+                        "protocolName": "mqtt"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "mqtt-device-smj.manipulator",
+            "name": "mqtt-device-smj.manipulator",
+            "protocol": "customized-protocol-mqtt-device-smj.manipulator",
+            "model": "mqtt-devicemodel-smj.manipulator",
+            "twins": [
+                {
+                    "propertyName": "move",
+                    "desired": {
+                        "value": "",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    },
+                    "reported": {
+                        "value": "",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "propertyName": "height",
+                    "desired": {
+                        "value": "",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    },
+                    "reported": {
+                        "value": "",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    }
+                }
+            ],
+            "propertyVisitors": [
+                {
+                    "name": "move",
+                    "propertyName": "move",
+                    "modelName": "mqtt-devicemodel-smj.manipulator",
+                    "protocol": "customized-protocol",
+                    "visitorConfig": {
+                        "configData": {
+                            "topicField": "move"
+                        },
+                        "protocolName": "mqtt"
+                    }
+                },
+                {
+                    "name": "height",
+                    "propertyName": "height",
+                    "modelName": "mqtt-devicemodel-smj.manipulator",
+                    "protocol": "customized-protocol",
+                    "visitorConfig": {
+                        "configData": {
+                            "topicField": "height"
+                        },
+                        "protocolName": "mqtt"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "coap-device",
+            "name": "coap-device",
+            "protocol": "customized-protocol-coap-device",
+            "model": "coap-sample-model",
+            "twins": [
+                {
+                    "propertyName": "temperature-enable",
+                    "desired": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    },
+                    "reported": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "propertyName": "temperature",
+                    "desired": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    },
+                    "reported": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    }
+                }
+            ],
+            "propertyVisitors": [
+                {
+                    "name": "temperature",
+                    "propertyName": "temperature",
+                    "modelName": "coap-sample-model",
+                    "protocol": "customized-protocol",
+                    "collectCycle": 5000,
+                    "visitorConfig": {
+                        "protocolName": "coap",
+                        "configData": {
+                            "pathField": "temperature"
+                        }
+                    }
+                },
+                {
+                    "name": "temperature-enable",
+                    "propertyName": "temperature-enable",
+                    "modelName": "coap-sample-model",
+                    "protocol": "customized-protocol",
+                    "visitorConfig": {
+                        "protocolName": "coap",
+                        "configData": {
+                            "pathField": "temperature/enable"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "deviceModels": [
+        {
+            "name": "mqtt-sample-model",
+            "properties": [
+                {
+                    "name": "temperature",
+                    "dataType": "int",
+                    "description": "temperature in degree celsius",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 0,
+                    "minimum": 0,
+                    "maximum": 100,
+                    "unit": "degree celsius"
+                },
+                {
+                    "name": "temperature-enable",
+                    "dataType": "int",
+                    "description": "enable data collection of temperature sensor",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 1,
+                    "minimum": 0,
+                    "maximum": 0
+                }
+            ]
+        },
+        {
+            "name": "devicemodel-smj.manipulator",
+            "properties": [
+                {
+                    "name": "move",
+                    "dataType": "string",
+                    "description": "位移/测长传感器",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": ""
+                },
+                {
+                    "name": "height",
+                    "dataType": "string",
+                    "description": "高度",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": ""
+                }
+            ]
+        },
+        {
+            "name": "mqtt-devicemodel-smj.manipulator",
+            "properties": [
+                {
+                    "name": "move",
+                    "dataType": "string",
+                    "description": "位移/测长传感器",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": ""
+                },
+                {
+                    "name": "height",
+                    "dataType": "string",
+                    "description": "高度",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": ""
+                }
+            ]
+        },
+        {
+            "name": "coap-sample-model",
+            "properties": [
+                {
+                    "name": "temperature",
+                    "dataType": "int",
+                    "description": "temperature in degree celsius",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 0,
+                    "minimum": 0,
+                    "maximum": 100,
+                    "unit": "degree celsius"
+                },
+                {
+                    "name": "temperature-enable",
+                    "dataType": "int",
+                    "description": "enable data collection of temperature sensor",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 1,
+                    "minimum": 0,
+                    "maximum": 0
+                }
+            ]
+        }
+    ],
+    "protocols": [
+        {
+            "name": "customized-protocol-device-smj.manipulator",
+            "protocol": "customized-protocol",
+            "protocolConfig": {
+                "configData": {
+                    "certification": "",
+                    "password": "",
+                    "server": "tcp: //127.0.0.1:1883",
+                    "topic": "mqtt/input/device/%s/delta",
+                    "username": ""
+                },
+                "protocolName": "mqtt"
+            },
+            "protocolCommonConfig": null
+        },
+        {
+            "name": "customized-protocol-mqtt-device",
+            "protocol": "customized-protocol",
+            "protocolConfig": {
+                "configData": {
+                    "certification": "",
+                    "password": "",
+                    "server": "tcp://127.0.0.1:1883",
+                    "topic": "mqtt/input/device/%s/delta",
+                    "username": ""
+                },
+                "protocolName": "mqtt"
+            },
+            "protocolCommonConfig": null
+        },
+        {
+            "name": "customized-protocol-mqtt-device-smj.manipulator",
+            "protocol": "customized-protocol",
+            "protocolConfig": {
+                "configData": {
+                    "certification": "",
+                    "password": "",
+                    "server": "tcp://127.0.0.1:1883",
+                    "topic": "mqtt/input/device/%s/delta",
+                    "username": ""
+                },
+                "protocolName": "mqtt"
+            },
+            "protocolCommonConfig": null
+        },
+        {
+            "name": "customized-protocol-coap-device",
+            "protocol": "customized-protocol",
+            "protocolConfig": {
+                "protocolName": "coap",
+                "configData": {
+                    "server": "127.0.0.1:5683"
+                }
+            },
+            "protocolCommonConfig": null
+        }
+    ]
+}

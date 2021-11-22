@@ -5,4 +5,4 @@ mqtt:
   certification: ""
 #configmap: /opt/kubeedge/deviceProfile.json
 #configmap: configmap_mqtt_test.json
-configmap: device-profile-config-edge120.json
+configmap: device-profile-config-edge120_new.json

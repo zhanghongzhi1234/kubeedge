@@ -1,0 +1,112 @@
+{
+    "deviceInstances": [
+        {
+            "id": "coap-device",
+            "name": "coap-device",
+            "protocol": "customized-protocol-coap-device",
+            "model": "coap-sample-model",
+            "twins": [
+                {
+                    "propertyName": "temperature-enable",
+                    "desired": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    },
+                    "reported": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "propertyName": "temperature",
+                    "desired": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    },
+                    "reported": {
+                        "value": "0",
+                        "metadata": {
+                            "timestamp": "1550049403598",
+                            "type": "string"
+                        }
+                    }
+                }
+            ],
+            "propertyVisitors": [
+                {
+                    "name": "temperature",
+                    "propertyName": "temperature",
+                    "modelName": "coap-sample-model",
+                    "protocol": "customized-protocol",
+                    "collectCycle": 5000,
+                    "visitorConfig": {
+                        "protocolName": "coap",
+                        "configData": {
+                            "pathField": "temperature"
+                        }
+                    }
+                },
+                {
+                    "name": "temperature-enable",
+                    "propertyName": "temperature-enable",
+                    "modelName": "coap-sample-model",
+                    "protocol": "customized-protocol",
+                    "visitorConfig": {
+                        "protocolName": "coap",
+                        "configData": {
+                            "pathField": "temperature/enable"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "deviceModels": [
+        {
+            "name": "coap-sample-model",
+            "properties": [
+                {
+                    "name": "temperature",
+                    "dataType": "int",
+                    "description": "temperature in degree celsius",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 0,
+                    "minimum": 0,
+                    "maximum": 100,
+                    "unit": "degree celsius"
+                },
+                {
+                    "name": "temperature-enable",
+                    "dataType": "int",
+                    "description": "enable data collection of temperature sensor",
+                    "accessMode": "ReadWrite",
+                    "defaultValue": 1,
+                    "minimum": 0,
+                    "maximum": 0
+                }
+            ]
+        }
+    ],
+    "protocols": [
+        {
+            "name": "customized-protocol-coap-device",
+            "protocol": "customized-protocol",
+            "protocolConfig": {
+                "protocolName": "coap",
+                "configData": {
+                    "server": "127.0.0.1: 5683"
+                }
+            },
+            "protocolCommonConfig": null
+        }
+    ]
+}
