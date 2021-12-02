@@ -122,7 +122,7 @@ func TransferData(isRegisterSwap bool, isSwap bool,
 // Run timer function.
 func (td *TwinData) Run() {
 	var err error
-	td.Results, err = td.Client.Get(td.VisitorConfig.ConfigData.PathField)
+	td.Results, err = td.Client.Get(td.VisitorConfig.VisitorConfigData.PathField)
 	if err != nil {
 		klog.Errorf("Get register failed: %v", err)
 		return
@@ -146,10 +146,10 @@ func (td *TwinData) Run() {
 			return
 		}
 	}
-	if !globals.LocalTest {
-		if err = globals.MqttClient.Publish(td.Topic, payload); err != nil {
-			klog.Errorf("Publish topic %v failed, err: %v", td.Topic, err)
-		}
+	//if !globals.LocalTest {
+	if err = globals.MqttClient.Publish(td.Topic, payload); err != nil {
+		klog.Errorf("Publish topic %v failed, err: %v", td.Topic, err)
 	}
+	//}
 	klog.V(1).Infof("Get the %s value as %s", td.Name, sData)
 }

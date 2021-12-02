@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mqtt-mapper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mqttmapper
+  template:
+    metadata:
+      labels:
+        app: mqttmapper
+    spec:
+      hostNetwork: true
+      containers:
+      - name: mqtt-mapper-container
+        image: mqtt-mapper:v1.0.4-linux
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/kubeedge/
+        - mountPath: /dev/ttyS0
+          name: mqtt-dev0
+        - mountPath: /dev/ttyS1
+          name: mqtt-dev1
+      nodeName: edge120
+      volumes:
+      - name: config-volume
+        configMap:
+          name: device-profile-config-edge120
+      - name: mqtt-dev0
+        hostPath:
+          path: /dev/ttyS0
+      - name: mqtt-dev1
+        hostPath:
+          path: /dev/ttyS1
+      restartPolicy: Always

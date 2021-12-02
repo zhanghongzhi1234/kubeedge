@@ -18,8 +18,8 @@ package configmap
 
 // DirectVisitorConfig is the direct register configuration.
 type DirectVisitorConfig struct {
-	ProtocolName string            `json:"protocolName"`
-	ConfigData   VisitorConfigData `json:"visitorConfigData"`
+	ProtocolName      string `json:"protocolName"`
+	VisitorConfigData `json:"configData"`
 }
 
 type VisitorConfigData struct {
@@ -38,7 +38,8 @@ type ConfigData struct {
 	Username      string `json:"username,omitempty"`
 	Password      string `json:"password,omitempty"`
 	Cert          string `json:"certification,omitempty"`
-	Topic         string `json:"topic,omitempty"`
+	InputTopic    string `json:"inputTopic,omitempty"`
+	OutputTopic   string `json:"outputTopic,omitempty"`
 }
 
 // DirectProtocolCommonConfig is the direct protocol configuration.

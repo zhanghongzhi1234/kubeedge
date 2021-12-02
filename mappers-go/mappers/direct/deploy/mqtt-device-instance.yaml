@@ -1,0 +1,64 @@
+apiVersion: devices.kubeedge.io/v1alpha2
+kind: Device
+metadata:
+  name: mqtt-device
+  labels:
+    description: TISimplelinkSensorTag
+    manufacturer: TexasInstruments
+    model: CC2650
+spec:
+  deviceModelRef:
+    name: mqtt-sample-model
+  protocol:
+    customizedProtocol:
+      protocolName: mqtt
+      configData:
+        server: tcp://127.168.20.17:1883
+        username: ""
+        password: ""
+        certification: ""
+        inputTopic: mqtt/input/device/%s/delta
+        outputTopic: mqtt/output/device/%s/delta
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+      - key: ''
+        operator: In
+        values:
+        - edge120
+  propertyVisitors:
+    - propertyName: temperature
+      customizedProtocol:
+        protocolName: mqtt
+        configData:
+            topicField: temperature
+      collectCycle: 5000
+    - propertyName: temperature-enable
+      customizedProtocol:
+        protocolName: mqtt
+        configData:
+            topicField: temperature-enable
+status:
+  twins:
+    - propertyName: temperature-enable
+      reported:
+        metadata:
+          timestamp: '1550049403598'
+          type: int
+        value: "0"
+      desired:
+        metadata:
+          timestamp: '1550049403598'
+          type: int
+        value: "0"
+    - propertyName: temperature
+      reported:
+        metadata:
+          timestamp: '1550049403598'
+          type: int
+        value: "0"
+      desired:
+        metadata:
+          timestamp: '1550049403598'
+          type: int
+        value: "0"

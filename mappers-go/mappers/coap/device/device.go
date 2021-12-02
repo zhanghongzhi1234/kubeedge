@@ -47,11 +47,11 @@ var wg sync.WaitGroup
 // setVisitor check if visitory property is readonly, if not then set it.
 func setVisitor(visitorConfig *configmap.CoapVisitorConfig, twin *common.Twin, client *driver.CoapClient) {
 	if twin.PVisitor.PProperty.AccessMode == "ReadOnly" {
-		klog.V(1).Info("Visit readonly property: ", visitorConfig.ConfigData.PathField)
+		klog.V(1).Info("Visit readonly property: ", visitorConfig.VisitorConfigData.PathField)
 		return
 	}
 
-	_, err := client.Set(visitorConfig.ConfigData.PathField, twin.Desired.Value)
+	_, err := client.Set(visitorConfig.VisitorConfigData.PathField, twin.Desired.Value)
 	if err != nil {
 		klog.Errorf("Set visitor error: %v %v", err, visitorConfig)
 		return
@@ -123,10 +123,10 @@ func initCoap(protocolConfig configmap.CoapProtocolConfig, instanceID string) (c
 		client, err = driver.NewClient(coapConfig)
 
 	} else {
-		return nil, errors.New("No protocol found")
+		return nil, errors.New("no protocol found")
 	}
 
-	return client, nil
+	return client, err
 }
 
 // initTwin initialize the timer to get twin value.
@@ -187,7 +187,13 @@ func initData(dev *globals.CoapDev) {
 
 // initSubscribeMqtt subscribe Mqtt topics from cloudcore.
 func initSubscribeMqtt(instanceID string) error {
-	topic := fmt.Sprintf(common.TopicTwinUpdateDelta, instanceID)
+	var topic string
+	if globals.LocalTest {
+		topic = fmt.Sprintf("hw/events/device/%s/twin/update/delta", instanceID)
+	} else {
+		topic = fmt.Sprintf(common.TopicTwinUpdateDelta, instanceID)
+	}
+
 	klog.V(1).Info("Subscribe topic: ", topic)
 	return globals.MqttClient.Subscribe(topic, onMessage)
 }
@@ -233,12 +239,12 @@ func start(dev *globals.CoapDev) {
 	initTwin(dev)
 	initData(dev)
 
-	if !globals.LocalTest {
-		if err := initSubscribeMqtt(dev.Instance.ID); err != nil {
-			klog.Errorf("Init subscribe mqtt error: %v", err)
-			return
-		}
+	//if !globals.LocalTest {
+	if err := initSubscribeMqtt(dev.Instance.ID); err != nil {
+		klog.Errorf("Init subscribe mqtt error: %v", err)
+		return
 	}
+	//}
 
 	klog.V(1).Info(dev.Instance.ID, " start successfully")
 

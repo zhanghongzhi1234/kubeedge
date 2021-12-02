@@ -18,8 +18,8 @@ package configmap
 
 // CoapVisitorConfig is the coap register configuration.
 type CoapVisitorConfig struct {
-	ProtocolName string            `json:"protocolName"`
-	ConfigData   VisitorConfigData `json:"configData"`
+	ProtocolName      string `json:"protocolName"`
+	VisitorConfigData `json:"configData"`
 }
 
 type VisitorConfigData struct {

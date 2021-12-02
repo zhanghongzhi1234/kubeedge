@@ -1,0 +1,59 @@
+apiVersion: devices.kubeedge.io/v1alpha2
+kind: Device
+metadata:
+  name: coap-device
+  labels:
+    description: TISimplelinkSensorTag
+    manufacturer: TexasInstruments
+    model: CC2650
+spec:
+  deviceModelRef:
+    name: coap-sample-model
+  protocol:
+    customizedProtocol:
+      protocolName: coap
+      configData:
+        server: 127.0.0.1:5683
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+      - key: ''
+        operator: In
+        values:
+        - edge120
+  propertyVisitors:
+    - propertyName: temperature
+      customizedProtocol:
+        protocolName: coap
+        configData:
+            pathField: temperature
+      collectCycle: 5000
+    - propertyName: temperature-enable
+      customizedProtocol:
+        protocolName: coap
+        configData:
+            pathField: temperature/enable
+status:
+  twins:
+    - propertyName: temperature-enable
+      reported:
+        metadata:
+          timestamp: '1550049403598'
+          type: string
+        value: "0"
+      desired:
+        metadata:
+          timestamp: '1550049403598'
+          type: string
+        value: "0"
+    - propertyName: temperature
+      reported:
+        metadata:
+          timestamp: '1550049403598'
+          type: string
+        value: "0"
+      desired:
+        metadata:
+          timestamp: '1550049403598'
+          type: string
+        value: "0"

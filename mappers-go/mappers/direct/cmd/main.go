@@ -43,17 +43,17 @@ func main() {
 	}
 	klog.V(4).Info(c.Configmap)
 
-	if globals.LocalTest != true {
-		globals.MqttClient = common.MqttClient{IP: c.Mqtt.ServerAddress,
-			User:       c.Mqtt.Username,
-			Passwd:     c.Mqtt.Password,
-			Cert:       c.Mqtt.Cert,
-			PrivateKey: c.Mqtt.PrivateKey}
-		if err = globals.MqttClient.Connect(); err != nil {
-			klog.Fatal(err)
-			os.Exit(1)
-		}
+	//if globals.LocalTest != true {
+	globals.MqttClient = common.MqttClient{IP: c.Mqtt.ServerAddress,
+		User:       c.Mqtt.Username,
+		Passwd:     c.Mqtt.Password,
+		Cert:       c.Mqtt.Cert,
+		PrivateKey: c.Mqtt.PrivateKey}
+	if err = globals.MqttClient.Connect(); err != nil {
+		klog.Fatal(err)
+		os.Exit(1)
 	}
+	//}
 
 	if err = device.DevInit(c.Configmap); err != nil {
 		klog.Fatal(err)

@@ -210,7 +210,8 @@
                     "certification": "",
                     "password": "",
                     "server": "tcp://127.0.0.1:1883",
-                    "topic": "mqtt/input/device/%s/delta",
+                    "inputTopic": "mqtt/input/device/%s/delta",
+                    "outputTopic": "mqtt/output/device/%s/delta",
                     "username": ""
                 }
             },

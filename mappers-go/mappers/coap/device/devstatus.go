@@ -41,10 +41,10 @@ func (gs *GetStatus) Run() {
 		klog.Errorf("Create message state failed: %v", err)
 		return
 	}
-	if !globals.LocalTest {
-		if err = globals.MqttClient.Publish(gs.topic, payload); err != nil {
-			klog.Errorf("Publish failed: %v", err)
-			return
-		}
+	//if !globals.LocalTest {
+	if err = globals.MqttClient.Publish(gs.topic, payload); err != nil {
+		klog.Errorf("Publish failed: %v", err)
+		return
 	}
+	//}
 }

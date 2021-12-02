@@ -51,7 +51,7 @@ func setVisitor(visitorConfig *configmap.DirectVisitorConfig, twin *common.Twin,
 		return
 	}
 
-	_, err := client.Set(client.Topic, twin.Desired.Value)
+	_, err := client.Set(visitorConfig.VisitorConfigData.TopicField, twin.Desired.Value)
 	if err != nil {
 		klog.Errorf("Set visitor error: %v %v", err, visitorConfig)
 		return
@@ -185,7 +185,7 @@ func initDirect(protocolConfig configmap.DirectProtocolConfig, instanceID string
 			Username:      protocolConfig.MQTTConfigData.Username,
 			Password:      protocolConfig.MQTTConfigData.Password,
 			Cert:          protocolConfig.MQTTConfigData.Cert,
-			Topic:         fmt.Sprintf("mqtt/output/device/%s/delta", instanceID)}
+			Topic:         fmt.Sprintf(protocolConfig.MQTTConfigData.OutputTopic, instanceID)}
 		client, err = driver.NewClient(directConfig)
 
 	} else {
@@ -260,7 +260,12 @@ func initTwinMqtt(deviceTopic string, instanceID string) error {
 
 // initSubscribeMqtt subscribe Mqtt topics from cloudcore.
 func initSubscribeMqtt(instanceID string) error {
-	topic := fmt.Sprintf(common.TopicTwinUpdateDelta, instanceID)
+	var topic string
+	if globals.LocalTest {
+		topic = fmt.Sprintf("hw/events/device/%s/twin/update/delta", instanceID)
+	} else {
+		topic = fmt.Sprintf(common.TopicTwinUpdateDelta, instanceID)
+	}
 	klog.V(1).Info("Subscribe topic: ", topic)
 	return globals.MqttClient.Subscribe(topic, onMessage)
 }
@@ -295,7 +300,7 @@ func start(dev *globals.DirectDev) {
 		return
 	}
 
-	dev.Topic = protocolConfig.MQTTConfigData.Topic //save topic by device
+	dev.Topic = protocolConfig.MQTTConfigData.InputTopic //save topic by device
 	//client, err := initDirect(protocolCommConfig, protocolConfig.SlaveID)
 	client, err := initDirect(protocolConfig, dev.Instance.ID)
 	if err != nil {

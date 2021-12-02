@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coap-mapper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coapmapper
+  template:
+    metadata:
+      labels:
+        app: coapmapper
+    spec:
+      hostNetwork: true
+      containers:
+      - name: coap-mapper-container
+        image: coap-mapper:v1.0.3-linux
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/kubeedge/
+        - mountPath: /dev/ttyS0
+          name: coap-dev0
+        - mountPath: /dev/ttyS1
+          name: coap-dev1
+      nodeName: edge120
+      volumes:
+      - name: config-volume
+        configMap:
+          name: device-profile-config-edge120
+      - name: coap-dev0
+        hostPath:
+          path: /dev/ttyS0
+      - name: coap-dev1
+        hostPath:
+          path: /dev/ttyS1
+      restartPolicy: Always

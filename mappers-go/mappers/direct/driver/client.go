@@ -20,6 +20,8 @@ import (
 	"errors"
 	"sync"
 
+	"encoding/json"
+
 	"k8s.io/klog/v2"
 
 	"github.com/kubeedge/mappers-go/mappers/common"
@@ -113,14 +115,19 @@ func (c *DirectClient) Set(topicField string, value string) (results []byte, err
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	klog.V(1).Info("Set:", topicField, value)
+	klog.V(1).Infof("Set %v to %v", topicField, value)
+
+	topicValueMap := map[string]string{topicField: value}
+	results, _ = json.Marshal(topicValueMap)
 
 	if directConfig, ok := c.Config.(DirectConfig); ok {
-		if err = c.Client.Publish(directConfig.Topic, value); err != nil {
+		if err = c.Client.Publish(directConfig.Topic, results); err != nil {
 			klog.Errorf("Publish topic %v failed, err: %v", directConfig.Topic, err)
+		} else {
+			klog.V(1).Infof("Publish topic %v successfully, value: %v", directConfig.Topic, topicValueMap)
 		}
 	}
 
-	klog.V(1).Info("Set result:", err, results)
+	klog.V(1).Info("Set result:", err, value)
 	return results, err
 }
