@@ -88,6 +88,7 @@ func onMessage(client mqtt.Client, message mqtt.Message) {
 		klog.Errorf("Unmarshal message failed: %v", err)
 		return
 	}
+	klog.V(2).Infof("Receive message parsed: %v", delta)
 	for twinName, twinValue := range delta.Delta {
 		i := 0
 		for i = 0; i < len(dev.Instance.Twins); i++ {
