@@ -18,7 +18,7 @@ Please click below 2 mapper name to view detailed deployment steps
 |Name | Description |
 |---|---|
 |  [Mqtt](./mappers-go/mappers/direct/README.md)     | Mapper for device direct connect to edge node with mqtt protocol
-|[Coap](./mappers-go/coap/README.md) | Mapper for device connect to edge node with coap protocol
+|[Coap](./mappers-go/mappers/coap/README.md) | Mapper for device connect to edge node with coap protocol
 
 ## Mqtt vs coap
 Please click [here](./mappers-go/MQTT%20and%20CoAP.md) to view comparison of Mqtt and Coap
