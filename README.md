@@ -23,6 +23,8 @@ Please click below 2 mapper name to view detailed deployment steps
 ## Mqtt vs coap
 Please click [here](./mappers-go/MQTT%20and%20CoAP.md) to view comparison of Mqtt and Coap
 
+<iframe src="mappers-go/mappers/direct/README.md" seamless></iframe>
+
 ## License
 
 KubeEdge Mapper is under the Apache 2.0 license. See the [LICENSE](LICENSE) file for details..
